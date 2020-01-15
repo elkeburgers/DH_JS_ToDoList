@@ -29,35 +29,28 @@
         </div>
         <!-- quadro de tarefas -->
         <div class="row" id="board">
-            <div class="tarefa">
-                <!-- tarefas -->
-                <div class="col-md-8">
-                    A tarefa
-                </div>
-                <!-- botao check -->
-                <div class="col-md-2">
-                    <img src="images/botao_check.png" alt="" class="botaoCheck"> 
-                </div>
-            </div>
 
-            <div class="tarefa">
-                <!-- tarefas -->
-                <div class="col-md-8">
-                    A tarefa
-                </div>
-                <!-- botao check -->
-                <div class="col-md-2">
-                    <img src="images/botao_check.png" alt="" class="botaoCheck"> 
-                </div>
-            </div>
+            <!-- tarefas fixas apagadas no passo 9 para testar a renderização -->
 
         </div>
 
-        <button id="add">Adicionar Tarefas</button>
+        <!-- <button id="add">Adicionar Tarefas</button> -->
         <!-- id para fazer que este botao saiba o que estah sendo solicitado quando clicado -->
+        <!-- retirado a etapa 7 abaixo -->
 
     </main>
 
+    <!-- passo 7 - criando footer para fixar o botao de adicionar tarefa com campo para escrever a descricao da tarefa (titulo) -->
+    <footer class="bg-dark">
+        <div class="row">
+            <div class="col-md-8">
+                <input type="text"id="novaTarefa" class="col-lg-10" placeholder="Digite aqui a descrição da nova tarefa">
+            </div>
+            <div class="col-md-4">
+                <img src="images/botao_add_3.jfif" id="add" alt="" class="botaoCheck"> 
+            </div>
+        </div>
+    </footer>
 
     <!-- Passo 2 - Arquivos js -->
     <script src="javascript/javascript.js"></script>
