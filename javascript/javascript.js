@@ -91,6 +91,17 @@ function gerarTarefa(valorDigitado, posicao) {
     imgCheck.onclick = function(event){
         // let tarefaPai = event.target.parentNode.parentNode
         // tarefaPai.remove();
+
+        console.log(listaTarefas);
+        // para selecionar a tarefa correta, filtrando tudo o que for diferente da tarefa que quero concluir/remover.
+        // preciso usar o nome da variavel listaTarefas duas vezes para atualizar os valores dentro dela mesma durante a filtragem:
+        let posicaoTarefa = tarefa.getAttribute('posicao')
+        listaTarefas = listaTarefas.filter(function(valor, posicao){
+            return posicao != posicaoTarefa
+        })
+
+        console.log(listaTarefas);
+
         tarefa.remove();
         // a linha de cima eh um resumo do que foi feito nas outras duas, e funciona igual
     }
