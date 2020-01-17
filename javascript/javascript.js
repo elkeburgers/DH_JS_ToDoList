@@ -59,6 +59,9 @@ function mostrarNaTela(listaTarefas) {
     //     gerarTarefa(item)
     // } - cancelado na aula 2 para fazer o codigo correto abaixo:
 
+    // para que o board limpe as tarefas e as reorganize após excluir alguma, ficando com a numeração correta:
+    board.innerHTML = ""
+
     // abaixo: dentro da listaTarefa o foreach vai buscar de cada item o valor e a poiscao e retonrar para a funcao abaixo fazer algo, ou seja, a funcao gerarTarefa
     listaTarefas.forEach(function(valor, posicao){
         gerarTarefa(valor, posicao)
@@ -93,15 +96,19 @@ function gerarTarefa(valorDigitado, posicao) {
         // tarefaPai.remove();
 
         console.log(listaTarefas);
+
         // para selecionar a tarefa correta, filtrando tudo o que for diferente da tarefa que quero concluir/remover.
         // preciso usar o nome da variavel listaTarefas duas vezes para atualizar os valores dentro dela mesma durante a filtragem:
-        let posicaoTarefa = tarefa.getAttribute('posicao')
+        let posicaoTarefa = tarefa.getAttribute('posicao');
         listaTarefas = listaTarefas.filter(function(valor, posicao){
-            return posicao != posicaoTarefa
+            return posicao != posicaoTarefa;
         })
+        // incluir abaixo para que o board carregue corretamente as tarefas, organizada e numeros sequenciais
+        mostrarNaTela(listaTarefas);
 
         console.log(listaTarefas);
-
+        // parara salvar o novo array no localStorage
+        localStorage.setItem('listaTarefas', JSON.stringify(listaTarefas));
         tarefa.remove();
         // a linha de cima eh um resumo do que foi feito nas outras duas, e funciona igual
     }
