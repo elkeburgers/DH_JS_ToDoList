@@ -40,9 +40,10 @@ buttonAdd.onclick = function () {
     // apos criar localStorage, para dar push da tarefa para ele:
     listaTarefas.push(valorDigitado)
 
-    gerarTarefa(valorDigitado)
+    gerarTarefa(valorDigitado, listaTarefas.length - 1)
     // funcao acima substitui o codigo anterior, visto que eh o mesmo
     // fica neste local porque precisa da variavel valorDigitado criada acima
+    // adicionado o listaTarefas.lenght - 1, para colocar um numero automatico na varaivel 'posicao'
 
     // passo 8 - continuação da funcao que puxa a tarefa nova apos - listaTarefas.push(valorDigitado)
     // apos o comando abaixo o teste no navegador, com F12 traz no storage a informação carregada, mas F5 ainda apaga da memoria
@@ -59,9 +60,11 @@ function mostrarNaTela(listaTarefas) {
     }
 }
 
-function gerarTarefa(valorDigitado) {
+function gerarTarefa(valorDigitado, posicao) {
     let tarefa = document.createElement('div');
     tarefa.setAttribute('class', 'tarefa');
+    // criar  o atributo novo 'posicao' para virar um 'id' de cada tarefa criada, e saber selecionar qual concluir/remover. Incluir tambem dna funcao para ela saber que precisa receber essa variavel, e a segunda 'posicao' eh o valor a ser carregado:
+    tarefa.setAttribute('posicao', posicao);
 
     let titulo = document.createElement('div');
     titulo.setAttribute('class', 'col=md-8');
@@ -79,7 +82,7 @@ function gerarTarefa(valorDigitado) {
     //concluir tarefa - criar um evento (objeto) associado ao botao criado quando criamos a tarefa:
     // target diz qual evento foi criado, o primeiro parentNode seleciona a div do botao, o segundo seleciona a div da tarefa inteira
     // let para criar a variavel para aramzenar esta informacao
-    // remove exclui a tarefa da tela, mas nao do localStorage ainda
+    // 'remove' exclui a tarefa da tela, mas nao do localStorage ainda
     imgCheck.onclick = function(event){
         // let tarefaPai = event.target.parentNode.parentNode
         // tarefaPai.remove();
@@ -93,9 +96,3 @@ function gerarTarefa(valorDigitado) {
     board.appendChild(tarefa);
 }
 
-// aula 02 - concluir tarefas
-function concluirTarefa(){
-
-
-    localStorage.getItem("listaTarefas", JSON.parse(listaTarefas))
-}
