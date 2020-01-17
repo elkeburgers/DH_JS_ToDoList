@@ -14,6 +14,7 @@ let buttonAdd = document.getElementById('add');
 let inputAdd = document.getElementById('novaTarefa');
 
 // passo 10 - para nao zerar o array criado na renderizacao
+// getItem pega informacao e setItem carrega/coloca a informacao
 let listaTarefas = [];
 if (localStorage.getItem('listaTarefas')) {
     listaTarefas = JSON.parse(localStorage.getItem('listaTarefas'))    
@@ -31,56 +32,17 @@ if (localStorage.getItem('listaTarefas')) {
 mostrarNaTela(listaTarefas);
 
 // passo 5 - continuacao
+// concluir tarefa - retirar o que eh repetido na funcoa gerarTarefa e manter apenas o que carrega no localStorage
 buttonAdd.onclick = function () {
+    
     // passo 8 - continuacao:
     let valorDigitado = inputAdd.value;
     // apos criar localStorage, para dar push da tarefa para ele:
     listaTarefas.push(valorDigitado)
 
-    // passo 5 - continuacao
-    // onclick = quando o botao eh acionado
-    // function() = eh uma funcao anonima, nao pode ser chamada depois para reaproveitamento de codigo, entoa soh eh usada quando sabemos que nao precisamos reutilizar.    
-
-    // testando:    
-    // alert("Estou no clik do botao")
-
-
-    // passo 6 - para que cada nova tarefa crie um novo box
-    // createElement = para criar um box novo, dizendo no parenteses que elemento é esse, no caso do  primeiro uma div. Estamos basicamente replicando a estrutura montada no html e bootstrap:
-    let tarefa = document.createElement('div');
-    // puxar os atributos da classe tarefa:
-    tarefa.setAttribute('class', 'tarefa');
-
-    // criar a descricao/texto da tarefa:
-    let titulo = document.createElement('div');
-    titulo.setAttribute('class', 'col=md-8');
-    // para o usuario colocar a descrição da tarefa:
-    // estatico para teste:
-    // titulo.textContent = "Essa é uma nova tarefa"; - cancelado na etapa 8
-    titulo.textContent = valorDigitado;
-
-    // criar o botao de check/feito:
-    let buttonCheck = document.createElement('div');
-    buttonCheck.setAttribute('class', 'col-md-2');
-
-    // criar a imagem do botao check:
-    let imgCheck = document.createElement('img');
-    // abaixo puxo a classe que criei para controlar o tamanho da imagem:
-    imgCheck.setAttribute('class', 'botaoCheck');
-    // puxando a imagem em si do botao:
-    imgCheck.setAttribute('src', 'images/botao_check.png');
-
-    //para colocar o titulo, botao e imagem dentro do "tarefa":
-    // abaixo: estou colocando o elemento botao dentro a imagem dele:
-    buttonCheck.appendChild(imgCheck);
-    // colocando os elementos dentro da "tarefa":
-    tarefa.appendChild(titulo);
-    tarefa.appendChild(buttonCheck);
-
-    // colocar os box "tarefa" dentro do "board"
-    board.appendChild(tarefa);
-
-    // testando agora no navegador, ao apertar o botao "adicionar tarefas", aparece um novo box de tarefa.
+    gerarTarefa(valorDigitado)
+    // funcao acima substitui o codigo anterior, visto que eh o mesmo
+    // fica neste local porque precisa da variavel valorDigitado criada acima
 
     // passo 8 - continuação da funcao que puxa a tarefa nova apos - listaTarefas.push(valorDigitado)
     // apos o comando abaixo o teste no navegador, com F12 traz no storage a informação carregada, mas F5 ainda apaga da memoria
@@ -113,8 +75,27 @@ function gerarTarefa(valorDigitado) {
     imgCheck.setAttribute('src', 'images/botao_check.png');
 
     buttonCheck.appendChild(imgCheck);
+
+    //concluir tarefa - criar um evento (objeto) associado ao botao criado quando criamos a tarefa:
+    // target diz qual evento foi criado, o primeiro parentNode seleciona a div do botao, o segundo seleciona a div da tarefa inteira
+    // let para criar a variavel para aramzenar esta informacao
+    // remove exclui a tarefa da tela, mas nao do localStorage ainda
+    imgCheck.onclick = function(event){
+        // let tarefaPai = event.target.parentNode.parentNode
+        // tarefaPai.remove();
+        tarefa.remove();
+        // a linha de cima eh um resumo do que foi feito nas outras duas, e funciona igual
+    }
+
     tarefa.appendChild(titulo);
     tarefa.appendChild(buttonCheck);
 
     board.appendChild(tarefa);
+}
+
+// aula 02 - concluir tarefas
+function concluirTarefa(){
+
+
+    localStorage.getItem("listaTarefas", JSON.parse(listaTarefas))
 }
