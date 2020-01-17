@@ -55,9 +55,14 @@ buttonAdd.onclick = function () {
 // criar functions e copiar o box acima na gerarTarefa
 // item eh a informação que estamos armazenando (box tarefa nova)
 function mostrarNaTela(listaTarefas) {
-    for(let item of listaTarefas){
-        gerarTarefa(item)
-    }
+    // for(let item of listaTarefas){
+    //     gerarTarefa(item)
+    // } - cancelado na aula 2 para fazer o codigo correto abaixo:
+
+    // abaixo: dentro da listaTarefa o foreach vai buscar de cada item o valor e a poiscao e retonrar para a funcao abaixo fazer algo, ou seja, a funcao gerarTarefa
+    listaTarefas.forEach(function(valor, posicao){
+        gerarTarefa(valor, posicao)
+    })
 }
 
 function gerarTarefa(valorDigitado, posicao) {
