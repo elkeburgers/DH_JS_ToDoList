@@ -31,6 +31,21 @@ if (localStorage.getItem('listaTarefas')) {
 //passo 9 - continuacao:
 mostrarNaTela(listaTarefas);
 
+// para adiconar a tarefa tambem por enter:
+inputAdd.onkeypress = function(event){
+    if (event.key == "Enter"){
+        let valorDigitado = inputAdd.value;
+        listaTarefas.push(valorDigitado)
+
+        gerarTarefa(valorDigitado, listaTarefas.length - 1)
+        localStorage.setItem("listaTArefas", JSON.stringify(listaTarefas));
+        // para limpar o campo apos a inclusao
+        inputAdd.value = ""
+    }
+}
+
+
+
 // passo 5 - continuacao
 // concluir tarefa - retirar o que eh repetido na funcoa gerarTarefa e manter apenas o que carrega no localStorage
 buttonAdd.onclick = function () {
@@ -49,6 +64,8 @@ buttonAdd.onclick = function () {
     // apos o comando abaixo o teste no navegador, com F12 traz no storage a informação carregada, mas F5 ainda apaga da memoria
     localStorage.setItem("listaTarefas", JSON.stringify(listaTarefas))
     // para renderizar as tarefas (armazenar em definitivo e retornar na tela) - seguir passo 9
+
+    inputAdd.value = ""
 }
 
 // passo 9 - renderizacao das tarefas
